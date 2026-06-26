@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTML Slideshow</title>
+    <style>
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 800px;
+            max-height: 800px;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Hide images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Ensure images fit the container nicely */
+        .mySlides img {
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.3s ease;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3);
+            border: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* On hover, add a darker background option */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fadeAnimation;
+            animation-duration: 0.5s;
+        }
+
+        @keyframes fadeAnimation {
+            from { opacity: 0.4; } 
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align:center">My Image Slideshow</h2>
+
+    <!-- Slideshow Wrapper -->
+    <div class="slideshow-container">
+
+        <!-- Slide 1 -->
+        <div class="mySlides fade">
+            <!-- Replace URLs with your own image paths -->
+            <img src="imgs/bb.png" alt="Beautiful Landscape">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="mySlides fade">
+            <img src="imgs/monke.png" alt="Mountain View">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="mySlides fade">
+            <img src="imgs/pillow.png" alt="Ocean Sunset">
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <script>
+        // Start at the first slide
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Main display logic
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            
+            // Loop back to the first slide if at the end
+            if (n > slides.length) { slideIndex = 1 }
+            
+            // Loop to the last slide if going backwards past the first
+            if (n < 1) { slideIndex = slides.length }
+            
+            // Hide all slides initially
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            // Show the current active slide
+            slides[slideIndex-1].style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
